@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="./Assets/style.css">
 </head>
 <body>
-    <header class = "highscore">
-        <p>View Highscores</p>
+    <header>
+        <button class = "highscore">View Highscores</button>
         <p class="timer">Timer</p>
     </header>
-    <main>
+    <main id = "quizMain">
         <h1>Coding Quiz Challenge</h1>
         <p>Try to answer the following code-related questions and get a highscore! Keep in mind that incorrect answers will penalize your score and time. <strong>You'll have 60 seconds to complete this quiz.</strong></p>
     </main>
@@ -30,15 +30,21 @@
                 </ul>
             </div>
         </section>
-        <form id="leaderDisplay">
-            <label for="msg">Enter Initials</label>
-            <textarea name="name" id="msg"></textarea>
-            <button id="save">SAVE</button>
-        </form>
+
+        <section id="leaderDisplay">
+            <form>
+                <h3 class="message"></h3> 
+                        <label for="name">Enter Initials</label>
+                        <input type="text" id="user" name="entry">
+            </form>
+            <button id="save">Save</button>
+         </section>
+        
         <section class="buttonCard">
             <button class="start btn btn-nav">Start</button>
             <button class="go-back btn btn-nav">Return</button>
-            <button class="highscore btn btn-nav">Leaderboard</button>
+<!--         I had trouble making this button work so I commented it out    
+            <button class="highscore btn btn-nav">Leaderboard</button> -->
         </section>
     </div>
     <div id="right-wrong"></div>

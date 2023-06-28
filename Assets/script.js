@@ -5,12 +5,17 @@ var btnB = document.getElementById("b");
 var btnC = document.getElementById("c");
 var btnD = document.getElementById("d");
 var selection = document.getElementById("selection");
+var quizMain = document.getElementById("quizMain");
 var timer = document.querySelector(".timer");
 var start = document.querySelector(".start");
 var back = document.querySelector(".go-back");
 var showHide = document.getElementById("showHide");
 var disp = document.getElementById("cardDisplay");
 var leaderDisplay = document.getElementById("leaderDisplay");
+
+
+
+
 
 // Set Default Display
 disp.style = ("display: none;");
@@ -85,24 +90,24 @@ function displayQuiz() {
 
 //answer function with timer modifier
 function answer(pick) {
-    if (count >= 4 || time <= 0) {
+    
+    if (count >= 3 || time <= 0) {
         alert("That's all Folks. Press Return to try again.");
         showHide.style = ("display:none");
         count = 0;
         userscore = time;
         time = 0;
         leaderDisplay.style = ("display: ;");
+        console.log(userscore)
         return userscore;
     } else if(pick.target.id === quiz[count].correct) {
         // right-wrong.innerText = "That's Right!"
         count++;
         displayQuiz();
-    }
-    else {
+    } else {
         // right-wrong.innerText = "No. You lost time!"
         count++;
         time = time-10;
-        console.log(time);
         clock;
         displayQuiz();
     }
@@ -122,6 +127,7 @@ start.onclick = function () {
     start.style = ("display: none;");
     back.style = ("display: ;");
     leaderDisplay.style = ("display: none;");
+    quizMain.style = ("display: none;");
 }
 
 //Return button
@@ -130,6 +136,7 @@ back.onclick = function() {
     disp.style = ("display: none;");
     start.style = ("display: ;");
     back.style = ("display: none;");
+    quizMain.style = ("display: ;");
     leaderDisplay.style = ("display: none;");
 }
 
@@ -141,5 +148,68 @@ highscores.onclick = function() {
     disp.style = ("display: none;");
     start.style = ("display: none;");
     back.style = ("display: ;");
-    //display of previous quiz attempts
+    quizMain.style = ("display: none;");
+   
 }
+
+
+ //display of previous quiz attempts
+
+//  //form variables
+var user = document.getElementById("user");
+var save = document.getElementById("save");
+var finalscore;
+
+save.addEventListener("click", function(event) {
+    event.preventDefault();
+    
+    finalscore = {
+        user:user.value, 
+        userscore
+    };
+    localStorage.setItem("finalscore", JSON.stringify(finalscore));
+    renderMessage();
+    });
+
+    function renderMessage() {
+        var lastScore = JSON.parse(localStorage.getItem("finalscore"));
+        if (finalscore.userscore === undefined) {
+            document.querySelector(".message").textContent = "Make sure to take the quiz first! Click Return to take the quiz. "
+        } else  if (finalscore !== null) {
+          document.querySelector(".message").textContent = lastScore.user + 
+          " received " + lastScore.userscore + "points"
+        }
+      }
+
+
+//Below is a bunch of stuff I couldnt figure out.
+
+
+//  save.onclick = function() {
+//     document.querySelector(".message").textContent = user + 
+//     " received " + userscore + "points"
+//  }
+
+// //FORM COMPLETION
+// name.addEventListener("click", function(event) {
+//     event.preventDefault();
+    
+//     var username = {
+//       user: name.value.trim(),
+//       score: userscore 
+//     }
+
+// localStorage.setItem("username", JSON.stringify(username));
+// renderMessage();
+
+// });
+
+// function renderMessage() {
+//     var lastScore = JSON.parse(localStorage.getItem("username"));
+//     if (lastScore !== null) {
+//       document.querySelector(".message").textContent = lastScore.user + 
+//       " received " + lastScore.score
+//     }
+//   }
+
+//   console.log(name.value)
