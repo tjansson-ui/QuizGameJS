@@ -1,4 +1,6 @@
 Quiz Challenge was generated as part of the UW coding bootcamp. 
+reach the live page at https://tjansson-ui.github.io/QuizGameJS/
+reach the repo at https://github.com/tjansson-ui/QuizGameJS
 
 Webpage displays a quiz upon clicking the start button and resets the page with the return button. 
 
