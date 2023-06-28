@@ -1,24 +1,35 @@
 // Quiz structural variables
-var questionQ = document.getElementById("quizQ")
-var btnA = document.getElementById("a")
-var btnB = document.getElementById("b")
-var btnC = document.getElementById("c")
-var btnD = document.getElementById("d")
-var selection = document.getElementById("selection")
-var timer = document.querySelector(".timer")
-var start = document.querySelector(".start")
-var back = document.querySelector(".go-back")
-var showHide = document.getElementById("showHide")
-var disp = document.getElementById("cardDisplay")
-
+var questionQ = document.getElementById("quizQ");
+var btnA = document.getElementById("a");
+var btnB = document.getElementById("b");
+var btnC = document.getElementById("c");
+var btnD = document.getElementById("d");
+var selection = document.getElementById("selection");
+var timer = document.querySelector(".timer");
+var start = document.querySelector(".start");
+var back = document.querySelector(".go-back");
+var showHide = document.getElementById("showHide");
+var disp = document.getElementById("cardDisplay");
+var leaderDisplay = document.getElementById("leaderDisplay");
 
 // Set Default Display
-disp.style = ("display: none;")
-back.style = ("display: none;")
+disp.style = ("display: none;");
+back.style = ("display: none;");
+leaderDisplay.style = ("display: none;")
 
 
-// quiz array index counter
+// Set counter, timer, user score, clock
 var count = 0;
+var time = 60;
+var clock = setInterval(function () {
+    timer.innerText = time
+    if (time <= 0) {
+        timer.innerText = "You're out of time!"
+    } else {
+        time--
+    }}, 1000);
+
+var userscore;
 
 
 // code-related quiz
@@ -74,20 +85,26 @@ function displayQuiz() {
 
 //answer function with timer modifier
 function answer(pick) {
-    if (count >= 4) {
-        alert("That's all Folks. Press Return to try again.")
-        showHide.style = ("display:none")
-        count = 0
-    } else if(pick.target.matches(".btn")) {
+    if (count >= 4 || time <= 0) {
+        alert("That's all Folks. Press Return to try again.");
+        showHide.style = ("display:none");
+        count = 0;
+        userscore = time;
+        time = 0;
+        leaderDisplay.style = ("display: ;");
+        return userscore;
+    } else if(pick.target.id === quiz[count].correct) {
         // right-wrong.innerText = "That's Right!"
-        count++
-        displayQuiz()
+        count++;
+        displayQuiz();
     }
     else {
         // right-wrong.innerText = "No. You lost time!"
-        count++
+        count++;
         time = time-10;
-        displayQuiz()
+        console.log(time);
+        clock;
+        displayQuiz();
     }
 }
 
@@ -97,33 +114,32 @@ selection.addEventListener("click", answer)
 //start button
 start.onclick = function () {
     count=0;
-    displayQuiz()
-    var time = 60
-    //timer 
-    setInterval(function () {
-    timer.innerText = time
-    if (time <= 0) {
-        timer.innerText = "You're out of time!"
-    } else {
-        time--
-    }}, 1000)
-    disp.style = "display: block;"
-    showHide.style = ("display:block;")
-    start.style = ("display: none;")
-    back.style = ("display: ;")
-
+    displayQuiz();
+    time = 60;
+    clock;
+    disp.style = ("display: block;");
+    showHide.style = ("display:block;");
+    start.style = ("display: none;");
+    back.style = ("display: ;");
+    leaderDisplay.style = ("display: none;");
 }
 
 //Return button
 back.onclick = function() {
-    timer.innerText = "60"
-    disp.style = "display: none;"
-    start.style = ("display: ;")
-    back.style = ("display: none;")
+    timer.innerText = "60";
+    disp.style = ("display: none;");
+    start.style = ("display: ;");
+    back.style = ("display: none;");
+    leaderDisplay.style = ("display: none;");
 }
 
-//future leaderboard display
-// var highscores = document.querySelector(".highscore")
-// highscores.onclick = function() {
-//     //display of previous quiz attempts
-// }
+// leaderboard display
+var highscores = document.querySelector(".highscore")
+highscores.onclick = function() {
+    time = 0;
+    leaderDisplay.style = ("display: ;");
+    disp.style = ("display: none;");
+    start.style = ("display: none;");
+    back.style = ("display: ;");
+    //display of previous quiz attempts
+}
