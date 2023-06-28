@@ -1,0 +1,44 @@
+
+header {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+main, section {
+    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    text-align: center;
+}
+
+
+.btn {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: left;
+
+}
+/* Future Styling to be considered */
+/* .btn-nav {
+
+}
+
+.start {
+
+}
+
+.go-back {
+
+}
+
+.reset {
+
+} */
+@media (min-width: 1000px) {
+    main, section {
+        width: 50%;
+    }
+}
